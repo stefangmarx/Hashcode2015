@@ -4,9 +4,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import Model.Data;
+
 public class Utilities {
 	// Method that reads the file.
-	public static void readFile(String inputFileName) {
+	public static Data readFile(String inputFileName) {
 		// Try to read the file. In case it fails, the exception is caught.
 		try {
 			String line; // Variable where each line will be registered.
@@ -20,17 +22,26 @@ public class Utilities {
 			line = bufferedReader.readLine(); // Read the next line.
 			data = line.split(" ");
 			
+			
+			// Instantiate object to return.
+			Data dataObject = new Data();
+			
 			// Move first line values to the variables.
-			// TODO.
-			// Example: int columns = Integer.parseInt(data[0]);
+			dataObject.setRows(Integer.parseInt(data[0]));
+			dataObject.setSlots(Integer.parseInt(data[1]));
+			dataObject.setUnavailableSlots(Integer.parseInt(data[2]));
+			dataObject.setPools(Integer.parseInt(data[3]));
+			dataObject.setServers(Integer.parseInt(data[4]));
 			
 			// Move the rest of data to the arrays.
 			// TODO.
 			
-			
 			bufferedReader.close();
+			
+			return dataObject;
 		} catch(IOException e) {
 			System.out.println("The file does not exist!");
+			return null;
 		}
 	}
 	
