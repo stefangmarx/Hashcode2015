@@ -1,0 +1,75 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import Model.Data;
+
+public class Utilities {
+	// Method that reads the file.
+	public static Data readFile(String inputFileName) {
+		// Try to read the file. In case it fails, the exception is caught.
+		try {
+			String line; // Variable where each line will be registered.
+			String [] data; // Array of strings that contains the different cells.
+			
+			// Open and read the input file.
+			FileReader read = new FileReader(inputFileName);
+			BufferedReader bufferedReader = new BufferedReader(read);
+			
+			// Save data of the first line.
+			line = bufferedReader.readLine(); // Read the next line.
+			data = line.split(" ");
+			
+			// Instantiate object to return.
+			Data dataObject = new Data(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Integer.parseInt(data[2]), Integer.parseInt(data[3]), Integer.parseInt(data[4]));
+			
+			// Move the rest of data to the arrays.
+			for (int i = 0; i < dataObject.getUnavailableSlots(); i++) {
+				line = bufferedReader.readLine(); // Read the next line.
+				data = line.split(" ");
+				dataObject.getDataCenter()[Integer.parseInt(data[0])][Integer.parseInt(data[1])] = "";
+				System.out.println(dataObject.getDataCenter()[Integer.parseInt(data[0])][Integer.parseInt(data[1])]);
+			}
+			
+			for (int j = 0; j < dataObject.getSlotsPerRow(); j++) {
+				System.out.println(dataObject.getDataCenter()[0][j]);
+			}
+			
+			bufferedReader.close();
+			
+			return dataObject;
+		} catch(IOException e) {
+			System.out.println("The file does not exist!");
+			return null;
+		}
+	}
+	
+	// Method that writes the file.
+	public static void writeFile(String outputFileName) {
+		FileWriter file = null;
+		PrintWriter printWriter = null;
+		
+		try {
+			// Declare and open the file.
+			file = new FileWriter(outputFileName);
+			printWriter = new PrintWriter(file);
+			
+			// Write in the file.
+			// TODO.
+			// String output = "Example";
+			// Example: printWriter.println(output);
+			
+		} catch(Exception e) {
+			e.printStackTrace(); // Show error.
+		} finally {
+			try {
+				file.close(); // Close the file.
+			} catch (IOException e) {
+				e.printStackTrace(); // Show error.
+			}
+		}
+		
+	}
+}

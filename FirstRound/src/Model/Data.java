@@ -1,13 +1,30 @@
 package Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Data {
-	int rows, slots, unavailableSlots, pools, servers;
+	private int rows, slotsPerRow, unavailableSlots, pools, servers;
+	private List<Server> serverList;
+	private String [][] dataCenter;
 	
 	// Constructor.
-	public Data() {
-		
+	public Data(int rows, int slotsPerRow, int unavailableSlots, int pools, int servers) {
+		this.rows = rows;
+		this.slotsPerRow = slotsPerRow;
+		this.unavailableSlots = unavailableSlots;
+		this.pools = pools;
+		this.servers = servers;
+		this.serverList = new ArrayList<Server>();
+		this.dataCenter = new String [rows][slotsPerRow];
 	}
-
+	
+	public void showServerList() {
+		for (Server server : this.serverList) {
+			System.out.println("Id: " + server.getId() + " Density: " + server.getDensity() + " Slots: " + server.getSlots());
+		}
+	}
+	
 	// Getters and setters.
 	public int getRows() {
 		return rows;
@@ -17,12 +34,12 @@ public class Data {
 		this.rows = rows;
 	}
 
-	public int getSlots() {
-		return slots;
+	public int getSlotsPerRow() {
+		return slotsPerRow;
 	}
 
-	public void setSlots(int slots) {
-		this.slots = slots;
+	public void setSlotsPerRow(int slotsPerRow) {
+		this.slotsPerRow = slotsPerRow;
 	}
 
 	public int getUnavailableSlots() {
@@ -47,5 +64,13 @@ public class Data {
 
 	public void setServers(int servers) {
 		this.servers = servers;
+	}
+	
+	public List<Server> getServerList() {
+		return this.serverList;
+	}
+	
+	public String [][] getDataCenter() {
+		return this.dataCenter;
 	}
 }
